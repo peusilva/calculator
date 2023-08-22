@@ -1,0 +1,17 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+#calculator {
+  background: black;
+  max-height: 60vh;
+  max-width: 40vh;
+  min-height: 520px;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
