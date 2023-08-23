@@ -1,12 +1,11 @@
 import './Display.css'
 import PropTypes from 'prop-types';
 
-const Display = ({ input, display, result}) => {
+const Display = ({ input, result}) => {
   return (
     <div id="display">
-      <div id='resultDisplay'>
-      {display}
-      {result!==0 && result}
+      <div id='resultDisplay'> 
+      {result}
       </div>
       <div id='inputDisplay'>
         {input}
@@ -17,7 +16,7 @@ const Display = ({ input, display, result}) => {
 
 Display.propTypes = {
   input: PropTypes.string,
-  display: PropTypes.array,
+  display: PropTypes.number,
   result: PropTypes.number
 }
 

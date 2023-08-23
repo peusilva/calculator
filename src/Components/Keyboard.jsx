@@ -30,7 +30,8 @@ Keyboard.propTypes = {
   handleOperators: PropTypes.func,
   handleClear: PropTypes.func,
   handleNumbers: PropTypes.func,
-  handleEquals: PropTypes.func
+  handleEquals: PropTypes.func,
+  handleSub: PropTypes.func
 }
 
 export default Keyboard

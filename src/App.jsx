@@ -9,21 +9,19 @@ class App extends React.Component {
     super();
     this.state = {
       input: '',
-      display: [],
-      result: 0
+      result: null,
+      lastOp: ''
     }
   }
   regex = /^\d*\.?\d*$/g;
   handleNumbers = (e) => {
     if (this.state.input.match(this.regex)){
     this.setState((prevState) => ({
-      input: prevState.input.concat(e.target.innerHTML),
-      result: 0 
+      input: prevState.input.concat(e.target.innerHTML)
     }))
   } else if (this.state.input === ''){
     this.setState((prevState) => ({
-      input: prevState.input.concat(e.target.innerHTML),
-      result: 0 
+      input: prevState.input.concat(e.target.innerHTML)
     }))
   } else {
     this.setState(() => ({
@@ -34,52 +32,80 @@ class App extends React.Component {
 
   handleOperators = (e) => {
     if (this.state.input===''){
-
-      this.setState((prevState)=> ({
-        display: [prevState.result],
-        result: 0,
+      this.setState(()=> ({
         input: e.target.innerHTML
+      }))      
+    } else if (this.state.result===null){
+      this.handleEquals()
+      this.setState((prevState) => ({
+        result: Number(prevState.input)
       }))
-      
-    } else {
-
-    this.setState((prevState) => ({
-      input: e.target.innerHTML,
-      display: [...prevState.display, Number(prevState.input)]
-  }))
-    } 
+    }else {
+      this.handleEquals()
+    }
+    this.setState({
+      lastOp: e.target.innerHTML,
+      input: e.target.innerHTML
+    })
     }
 
   handleClear = () => {
     this.setState({
       input: '',
-      display: [],
-      result: 0
+      result: null,
+      lastOp: ''
     })
   }
 
   handleEquals = () => {
-    this.setState((prevState) => ({
+    if (!this.state.input.match(this.regex))return
+    switch (this.state.lastOp) {
+      case '+':
+      this.setState((prevState) => ({
       input: '',
-      display: [...prevState.display, Number(prevState.input)]
+      result: (Number(prevState.input) + Number(prevState.result))
+     }))
+     break;
+
+     case '-':
+      this.setState((prevState) => ({
+      input: '',
+      result: (Number(prevState.result) - Number(prevState.input))
       }))
+      break;
+
+    case 'x':
     this.setState((prevState) => ({
-      result: prevState.display.reduce((acc, e) => acc + e, 0),
-      display: []
-      }))
+    input: '',
+    result: (Number(prevState.result) * Number(prevState.input))
+    }))
+    break;
+
+    case '/':
+    this.setState((prevState) => ({
+    input: '',
+    result: (Number(prevState.result) / Number(prevState.input))
+    }))
+    break;
+    
+
+     default:
+      return
+    }
+    console.log('equals ran')
+   
   }
 
 
 
   render () {
-    const { input, display, result } = this.state;
+    const { input, result, lastOp } = this.state;
   return (
     <>
       <h1>Javascript Calculator</h1>
       <div id='calculator'>
       <Display 
       input={input} 
-      display={display} 
       result={result}
       />
       <Keyboard input={input} result={result} 
@@ -88,10 +114,10 @@ class App extends React.Component {
       handleClear={this.handleClear}
       handleEquals={this.handleEquals}
       />
+      {console.log(input, result, lastOp)}
       </div>
     </>
     )
   }
 }
-
 export default App
