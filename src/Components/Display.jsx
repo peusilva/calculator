@@ -4,8 +4,14 @@ import PropTypes from "prop-types";
 const Display = ({ input, result }) => {
   return (
     <div id="display">
-      <div id="resultDisplay">{result}</div>
-      <div id="inputDisplay">{input}</div>
+      <div id="resultDisplay">
+        {(result === null && input === '') && 0}
+        {result === null && input}
+        {result}
+        </div>
+      <div id="inputDisplay">
+        {result!== null && input}
+        </div>
     </div>
   );
 };

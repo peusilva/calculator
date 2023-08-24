@@ -1,7 +1,7 @@
 import './Keyboard.css'
 import PropTypes from 'prop-types';
 
-const Keyboard = ({handleClear, handleNumbers, handleOperators, handleEquals }) => {
+const Keyboard = ({handleClear, handleNumbers, handleOperators, handleEquals, handleDecimals, handleSubtraction }) => {
   return (
     <div id='keyboard'>
     <button id="clear" onClick={handleClear}>AC</button>
@@ -10,7 +10,7 @@ const Keyboard = ({handleClear, handleNumbers, handleOperators, handleEquals }) 
     <button id="seven" onClick={handleNumbers}>7</button>
     <button id="eight" onClick={handleNumbers}>8</button>
     <button id="nine" onClick={handleNumbers}>9</button>
-    <button id="subtract" onClick={handleOperators}>-</button>
+    <button id="subtract" onClick={handleSubtraction}>-</button>
     <button id="four" onClick={handleNumbers}>4</button>
     <button id="five" onClick={handleNumbers}>5</button>
     <button id="six" onClick={handleNumbers}>6</button>
@@ -20,7 +20,7 @@ const Keyboard = ({handleClear, handleNumbers, handleOperators, handleEquals }) 
     <button id="three" onClick={handleNumbers}>3</button>
     <button id="equals" onClick={handleEquals}>=</button>
     <button id="zero" onClick={handleNumbers}>0</button>
-    <button id="decimal" onClick={handleNumbers}>.</button>
+    <button id="decimal" onClick={handleDecimals}>.</button>
     
     </div>
   )
@@ -31,7 +31,8 @@ Keyboard.propTypes = {
   handleClear: PropTypes.func,
   handleNumbers: PropTypes.func,
   handleEquals: PropTypes.func,
-  handleSub: PropTypes.func
+  handleSubtraction: PropTypes.func,
+  handleDecimals: PropTypes.func,
 }
 
 export default Keyboard
